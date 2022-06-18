@@ -8,6 +8,26 @@ NC='\033[0m'
 
 path=$1
 
+usage () {
+	printf "\n${NC}usage: $0 <destination folder>\n\n"
+	printf "${NC}example usage: $0 /opt\n\n"
+	exit
+}
+
+if [ "$#" -ne 1 ]; then
+	usage 
+fi
+if [ -z $path ]; then
+	printf "${RED}No destination folder provided...\n"
+	usage
+fi
+if [ ! -d "$path" ]; then
+	printf "${GREEN}Creating $path...\n"
+	mkdir $path
+else
+	printf "${YELLOW}$path exists moving forward...\n"
+fi
+
 tools=(
 # OSINT
 "sherlock-project/sherlock Datalux/Osintgram"
